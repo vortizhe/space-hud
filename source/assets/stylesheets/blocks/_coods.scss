@@ -1,0 +1,67 @@
+.x-coord {
+  position: absolute;
+  bottom: 100px;
+  width: 50%;
+  left: 50%;
+  @include transform(translate3d(-50%,0,0));
+  border: 1px solid $blue;
+  border-top: 0;
+  height: 20px;
+  .pointer {
+    display: block;
+    width: 70px;
+    height: 2px;
+    margin: 0 auto;
+    background: $blue;
+    @include animation(x-slide 30s linear infinite);
+  }
+}
+
+.y-coord {
+  position: absolute;
+  bottom: 200px;
+  right: 20%;
+  height: 50%;
+  width: 20px;
+  border: 1px solid $blue;
+  border-left: 0;
+  .pointer {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    display: block;
+    width: 2px;
+    height: 70px;
+    margin: 0 auto;
+    background: $blue;
+    @include animation(y-slide 45s linear infinite);
+  }
+}
+
+@include keyframes(x-slide) {
+  0%{ @include transform(translate3d(-50%,0,0)); }
+  10%{ @include transform(translate3d(-10%,0,0)); }
+  15%{ @include transform(translate3d(-40%,0,0)); }
+  25%{ @include transform(translate3d(0,0,0)); }
+  35%{ @include transform(translate3d(-15%,0,0)); }
+  50%{ @include transform(translate3d(10%,0,0)); }
+  50%{ @include transform(translate3d(75%,0,0)); }
+  75%{ @include transform(translate3d(-20%,0,0)); }
+  85%{ @include transform(translate3d(30%,0,0)); }
+  99%{ @include transform(translate3d(-100%,0,0)); }
+  100%{ @include transform(translate3d(-50%,0,0)); }
+}
+
+@include keyframes(y-slide) {
+  0%{ @include transform(translate3d(0,15%,0)); }
+  10%{ @include transform(translate3d(0,-30%,0)); }
+  20%{ @include transform(translate3d(0,50%,0)); }
+  30%{ @include transform(translate3d(0,-60%,0)); }
+  40%{ @include transform(translate3d(0,20%,0)); }
+  45%{ @include transform(translate3d(0,-30%,0)); }
+  50%{ @include transform(translate3d(0,35%,0)); }
+  70%{ @include transform(translate3d(0,-30%,0)); }
+  80%{ @include transform(translate3d(0,20%,0)); }
+  90%{ @include transform(translate3d(0,-10%,0)); }
+  100%{ @include transform(translate3d(0,15%,0)); }
+}
