@@ -1,0 +1,25 @@
+.circle,
+.circle2 {
+  display: none;
+  position: relative;
+  margin: 35px;
+  width: 150px;
+  height: 150px;
+  color: transparentize($blue, 0.35);
+  font-size: 24px;
+  text-align: center;
+  line-height: 174px;
+  b {
+    position: absolute;
+    display: block;
+    font-size: 13px;
+    top: -24px;
+    width: 100px;
+    text-transform: uppercase;
+  }
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
