@@ -1,3 +1,347 @@
 //
 // General styles
 //
+
+body {
+  background: #242C47;
+  overflow: hidden;
+}
+
+
+$blue: #3399FF;
+$red: #FF1A1A;
+
+.pin {
+  position: absolute;
+  bottom: 45px;
+  right: 45px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor:pointer;
+  @include transition(all .5s);
+  background: lighten($red, 5%);
+  @include animation(r 2s ease-out infinite);
+  .direction {
+    display: none;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: #FFF;
+    margin-left: -150px;
+    @include transform-origin(175px 25px);
+  }
+  &.touched {
+    right: 50%;
+    bottom: 50%;
+    background: $blue;
+    @include animation-play-state(paused);
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
+@mixin shadow($b,$s,$sm,$red){
+  box-shadow:
+    0 0 8px 6px $red,
+    0 0 $b $s #242C47,
+    0 0 $b ($s + $sm) $red;
+}
+
+@include keyframes(r) {
+  0%{ @include shadow(0,0,0,rgba($red,0)); }
+  10%{ @include shadow(12px,10px,4px,$red); }
+  100%{ @include shadow(0,40px,0,rgba($red,0)); }
+}
+
+
+.circle,
+.circle2 {
+  display: none;
+  position: relative;
+  margin: 35px;
+  width: 100px;
+  height: 100px;
+  color: transparentize($blue, 0.35);
+  font-size: 24px;
+  text-align: center;
+  line-height: 124px;
+  b {
+    position: absolute;
+    display: block;
+    font-size: 13px;
+    top: -24px;
+    width: 100px;
+    text-transform: uppercase;
+  }
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.stage {
+  display: none;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 45px;
+  top: 35px;
+  -webkit-perspective: 1600px;
+  -webkit-perspective-origin: 0 -240px;
+}
+
+.cube {
+  -webkit-transform-style: preserve-3d;
+  -webkit-animation: rotate 10s infinite linear;
+}
+
+figure {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-color: #60c2ef;
+  position: absolute;
+  overflow: hidden;
+  -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(RGBA(0, 0, 0, 0.1)));
+}
+
+figure:before, figure:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+figure:before {
+  background: -webkit-radial-gradient(top left, rgba(0, 0, 0, 0.5), #000000);
+}
+
+figure:after {
+  background: -webkit-radial-gradient(top right, rgba(0, 0, 0, 0.5), #000000);
+}
+
+.front {
+  background-color: $blue;
+  -webkit-transform: translateZ(25px);
+}
+
+.front:before {
+  -webkit-animation: frontShading1 10s infinite linear;
+}
+
+.front:after {
+  -webkit-animation: frontShading2 10s infinite linear;
+}
+
+.back {
+  background-color: $blue;
+  -webkit-transform: rotateY(180deg) translateZ(25px);
+}
+
+.back:before {
+  -webkit-animation: backShading2 10s infinite linear;
+}
+
+.back:after {
+  -webkit-animation: backShading1 10s infinite linear;
+}
+
+.top {
+  background-color: $blue;
+  -webkit-transform: rotateX(90deg) translateZ(25px);
+  -webkit-box-reflect: none;
+}
+
+.top:after {
+  content: " ";
+  opacity: 0.5;
+  width: 200%;
+  height: 200%;
+  margin-left: -50%;
+  margin-top: -50%;
+  background: -webkit-radial-gradient(bottom, rgba(0, 0, 0, 0), #000000);
+  -webkit-animation: rotateTop 10s infinite linear;
+}
+
+.bottom {
+  -webkit-transform: rotateX(-90deg) translateZ(25px);
+  -webkit-box-shadow: 0 10px 100px rgba(0, 0, 0, 0.7);
+  -webkit-backface-visibility: visible;
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-box-reflect: none;
+}
+
+.left {
+  background-color: $blue;
+  -webkit-transform: rotateY(-90deg) translateZ(25px);
+}
+
+.left:before {
+  -webkit-animation: leftShading1 10s infinite linear;
+}
+
+.left:after {
+  -webkit-animation: leftShading2 10s infinite linear;
+}
+
+.right {
+  background-color: $blue;
+  -webkit-transform: rotateY(90deg) translateZ(25px);
+}
+
+.right:before {
+  -webkit-animation: rightShading1 10s infinite linear;
+}
+
+.right:after {
+  -webkit-animation: rightShading2 10s infinite linear;
+}
+
+/* Animations */
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(360deg);
+  }
+}
+@-webkit-keyframes frontShading1 {
+  2% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.8;
+  }
+  35% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes frontShading2 {
+  50% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes backShading1 {
+  25% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.8;
+  }
+}
+@-webkit-keyframes backShading2 {
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+}
+@-webkit-keyframes leftShading1 {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 0.8;
+  }
+}
+@-webkit-keyframes leftShading2 {
+  0% {
+    opacity: 0.8;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+@-webkit-keyframes rightShading2 {
+  50% {
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes rightShading1 {
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@-webkit-keyframes rotateTop {
+  0% {
+    -webkit-transform: rotateZ(0);
+  }
+  100% {
+    -webkit-transform: rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes introduceCube {
+  0% {
+    opacity: 0;
+    top: -20px;
+    -webkit-transform: scale(0.6);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+    -webkit-transform: scale(1);
+  }
+}

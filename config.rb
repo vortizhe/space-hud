@@ -37,7 +37,7 @@
 
 # Reload the browser automatically whenever files change
 configure :development do
-  activate :livereload
+  #activate :livereload
   activate :bourbon
   set :debug_assets, true
 end
