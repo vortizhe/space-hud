@@ -6,12 +6,13 @@ $(function() {
 
   console.log('start');
 
-  $(document).on('touchstart click', function(event) {
+  $(document).on('tap click', function(event) {
     event.preventDefault();
     $pin.show();
     $pin.toggleClass('touched');
 
     $stage.show('fast');
+    $('.x-coord, .y-coord').show('fast');
 
     if ($('.circle').not(':visible').length > 0) {
       $('.circle').show('fast').circleProgress({

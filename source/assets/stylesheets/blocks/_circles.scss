@@ -1,19 +1,20 @@
 .circle,
 .circle2 {
   display: none;
-  position: relative;
-  margin: 35px;
-  width: 150px;
-  height: 150px;
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  width: 100px;
+  height: 100px;
   color: transparentize($blue, 0.35);
   font-size: 24px;
   text-align: center;
-  line-height: 174px;
+  line-height: 124px;
   b {
     position: absolute;
     display: block;
     font-size: 13px;
-    top: -24px;
+    top: -20px;
     width: 100px;
     text-transform: uppercase;
   }
@@ -22,4 +23,7 @@
     top: 0;
     left: 0;
   }
+}
+.circle2 {
+  top: 170px;
 }
